@@ -358,7 +358,10 @@ class GitHubRelease(object):
                 return u'{0}: {1}'.format(
                     self.repository['full_name'], self.release['name']
                 )
-        return u'{0} {1}'.format(self.repo_model.name, self.model.tag)
+        repository_name =\
+            self.repository.get('full_name', self.repo_model.name)
+        release_name = self.release.get('tag_name', self.model.tag)
+        return u'{0} {1}'.format(repository_name, release_name)
 
     @cached_property
     def description(self):
